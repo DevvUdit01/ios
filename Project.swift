@@ -102,17 +102,11 @@ let project = Project(
                 ],
                 configurations: [
                     .debug(name: "Debug", settings: [
-                        "SWIFT_OPTIMIZATION_LEVEL": "-Onone",
-                        "CODE_SIGN_STYLE": "Automatic",
-                        "CODE_SIGN_IDENTITY": "Apple Development",
-                        "DEVELOPMENT_TEAM": ""
+                        "SWIFT_OPTIMIZATION_LEVEL": "-Onone"
                     ]),
                     .release(name: "Release", settings: [
                         "SWIFT_OPTIMIZATION_LEVEL": "-O",
-                        "SWIFT_COMPILATION_MODE": "wholemodule",
-                        "CODE_SIGN_STYLE": "Automatic",
-                        "CODE_SIGN_IDENTITY": "Apple Distribution",
-                        "DEVELOPMENT_TEAM": ""
+                        "SWIFT_COMPILATION_MODE": "wholemodule"
                     ])
                 ]
             )
