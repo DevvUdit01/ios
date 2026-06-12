@@ -6,9 +6,6 @@ workflows:
       app_store_connect: key
     environment:
       xcode: latest
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.thejobsadvertise.app
     scripts:
       - name: Install Tuist
         script: |
@@ -20,6 +17,19 @@ workflows:
           swift package-registry set https://packages.median.co --scope median --global
           echo "Generating workspace..."
           tuist generate
+      - name: Fetch and set up Code Signing
+        script: |
+          echo "Initializing Keychain..."
+          keychain initialize
+          
+          echo "Downloading/Creating Provisioning Profiles from Apple Developer Portal..."
+          app-store-connect fetch-signing-files "com.thejobsadvertise.app" --type IOS_APP_STORE --create
+          
+          echo "Adding Certificates to Keychain..."
+          keychain add-certificates
+          
+          echo "Applying the profiles to the Xcode project..."
+          xcode-project use-profiles
       - name: Build ipa for distribution
         script: |
           echo "Building the iOS app..."
