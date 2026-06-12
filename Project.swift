@@ -111,7 +111,7 @@ let project = Project(
                         "SWIFT_OPTIMIZATION_LEVEL": "-O",
                         "SWIFT_COMPILATION_MODE": "wholemodule",
                         "CODE_SIGN_STYLE": "Automatic",
-                        "CODE_SIGN_IDENTITY": "Apple Development",
+                        "CODE_SIGN_IDENTITY": "Apple Distribution",
                         "DEVELOPMENT_TEAM": ""
                     ])
                 ]
