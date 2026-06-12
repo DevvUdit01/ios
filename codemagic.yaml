@@ -9,8 +9,8 @@ workflows:
     scripts:
       - name: Install Tuist
         script: |
-          echo "Installing Tuist..."
-          curl -Ls https://install.tuist.io | bash
+          echo "Installing Tuist via Homebrew..."
+          brew install tuist
       - name: Generate Xcode Project with Tuist
         script: |
           echo "Generating workspace..."
