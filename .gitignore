@@ -14,3 +14,8 @@ Derived/
 .tuist-cache/
 graph.json
 Extensions/
+
+# Private Keys - NEVER commit these!
+*.pem
+*.p12
+*.p8

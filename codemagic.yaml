@@ -6,6 +6,8 @@ workflows:
       app_store_connect: key
     environment:
       xcode: latest
+      groups:
+        - ios_signing
     scripts:
       - name: Install Tuist
         script: |
