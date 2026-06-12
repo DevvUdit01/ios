@@ -19,28 +19,28 @@ workflows:
           swift package-registry set https://packages.median.co --scope median --global
           echo "Generating workspace..."
           tuist generate
-      - name: Fetch Profiles and Build IPA
+      - name: Fetch Profiles and Set Up Signing
         script: |
           echo "Initializing Keychain..."
           keychain initialize
           
-          echo "Downloading Provisioning Profiles from Apple Developer Portal..."
+          echo "Downloading/Creating Provisioning Profiles..."
           app-store-connect fetch-signing-files "com.thejobsadvertise.app" --type IOS_APP_STORE --create
           
           echo "Adding Certificates to Keychain..."
           keychain add-certificates
           
+          echo "Applying profiles to Xcode project (also creates export_options.plist)..."
+          xcode-project use-profiles
+      - name: Build ipa for distribution
+        script: |
           echo "Building the iOS app..."
           WORKSPACE=$(find . -maxdepth 1 -name "*.xcworkspace" | head -n 1)
-          SCHEME="Median" 
+          SCHEME="Median"
           
-          echo "Forcing Xcode to use Profile UUID: $PROVISIONING_PROFILE"
-          
-          # Build the IPA, explicitly passing the downloaded profile UUID to Xcode
           xcode-project build-ipa \
             --workspace "$WORKSPACE" \
-            --scheme "$SCHEME" \
-            --archive-xcargs "PROVISIONING_PROFILE_SPECIFIER=$PROVISIONING_PROFILE"
+            --scheme "$SCHEME"
     
     artifacts:
       - build/ios/ipa/*.ipa
