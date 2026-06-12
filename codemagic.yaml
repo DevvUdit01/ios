@@ -6,6 +6,10 @@ workflows:
       app_store_connect: key
     environment:
       xcode: latest
+      vars:
+        # Tuist will use this Bundle ID and App Name when generating the Xcode project
+        TUIST_BUNDLE_ID: "com.thejobsadvertise.app"
+        TUIST_APP_NAME: "The Jobs Advertise"
     scripts:
       - name: Install Tuist
         script: |
@@ -18,10 +22,13 @@ workflows:
           echo "Generating workspace..."
           # This generates the .xcodeproj and .xcworkspace files based on Project.swift
           tuist generate
-      - name: Set up code signing settings on Xcode project
+      - name: Fetch and set up Code Signing
         script: |
-          # Codemagic CLI tool to automatically configure code signing
-          # It fetches the certificates from the connected Apple account and applies them
+          echo "Downloading/Creating Provisioning Profiles from Apple Developer Portal..."
+          # This Codemagic command will automatically create the App ID and Provisioning Profile if they don't exist!
+          app-store-connect fetch-signing-files "$TUIST_BUNDLE_ID" --type IOS_APP_STORE --create
+          
+          echo "Applying the profiles to the Xcode project..."
           xcode-project use-profiles
       - name: Build ipa for distribution
         script: |
