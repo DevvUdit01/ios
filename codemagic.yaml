@@ -1,0 +1,61 @@
+workflows:
+  ios-release:
+    name: iOS App Store Build
+    instance_type: mac_mini_m1
+    environment:
+      xcode: latest
+      # Apple Developer Portal integration setup
+      # NOTE: In Codemagic Dashboard, go to Settings -> Developer Portal and connect your Apple Developer Account.
+      # Then, in your workflow settings, create an Environment Group (e.g., 'app_store_credentials')
+      # containing APP_STORE_CONNECT_ISSUER_ID, APP_STORE_CONNECT_KEY_IDENTIFIER, APP_STORE_CONNECT_PRIVATE_KEY.
+      # groups:
+      #   - app_store_credentials
+    scripts:
+      - name: Install Tuist
+        script: |
+          echo "Installing Tuist..."
+          curl -Ls https://install.tuist.io | bash
+      - name: Generate Xcode Project with Tuist
+        script: |
+          echo "Generating workspace..."
+          # This generates the .xcodeproj and .xcworkspace files based on Project.swift
+          tuist generate
+      - name: Set up code signing settings on Xcode project
+        script: |
+          # Codemagic CLI tool to automatically configure code signing
+          # xcode-project use-profiles
+          echo "Note: Automatic code signing will be configured here if you uncomment 'groups' in environment and link your Apple account."
+      - name: Build ipa for distribution
+        script: |
+          echo "Building the iOS app..."
+          # Codemagic has a built in tool to build the IPA.
+          # Since the workspace name might be MedianIOS.xcworkspace or TheJobsAdvertise.xcworkspace, 
+          # we dynamically find the workspace.
+          WORKSPACE=$(ls -1 *.xcworkspace | head -n 1)
+          
+          # We use the target name defined in Project.swift which defaults to 'Median'
+          SCHEME="Median" 
+          
+          # Build the IPA without signing just to test if the code compiles successfully (since we don't have keys configured yet).
+          # Once you add Apple Developer keys in Codemagic dashboard, change this to build a signed IPA.
+          xcode-project build-ipa \
+            --workspace "$WORKSPACE" \
+            --scheme "$SCHEME" \
+            --disable-codesign 
+            
+          # To build a SIGNED IPA for App Store, you will use:
+          # xcode-project build-ipa --workspace "$WORKSPACE" --scheme "$SCHEME"
+    
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+      
+    publishing:
+      # Automatically publish to App Store Connect / TestFlight
+      app_store_connect:
+        # NOTE: You need to configure the App Store Connect integration in Codemagic UI for this to work.
+        auth: integration
+        
+        # Select the App Store Connect API key to use
+        # submit_to_testflight: true
