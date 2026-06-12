@@ -14,7 +14,7 @@ workflows:
       - name: Generate Xcode Project with Tuist
         script: |
           echo "Configuring Median SPM Registry..."
-          swift package-registry set https://packages.median.co --scope median
+          swift package-registry set https://packages.median.co --scope median --global
           echo "Generating workspace..."
           # This generates the .xcodeproj and .xcworkspace files based on Project.swift
           tuist generate
