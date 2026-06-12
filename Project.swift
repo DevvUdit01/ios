@@ -8,10 +8,10 @@ import ProjectDescription
 //
 let projectName = Environment.projectName.getString(default: "MedianIOS")
 let targetName = Environment.targetName.getString(default: "Median")
-let bundleId = Environment.bundleId.getString(default: "io.gonative.ios.dev")
+let bundleId = "com.thejobsadvertise.app"
 let marketingVersion = Environment.marketingVersion.getString(default: "1.0")
 let projectVersion = Environment.projectVersion.getString(default: "2")
-let appName = Environment.appName.getString(default: "Median")
+let appName = "The Jobs Advertise"
 
 let project = Project(
     name: projectName,
