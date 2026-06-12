@@ -24,9 +24,15 @@ workflows:
           tuist generate
       - name: Fetch and set up Code Signing
         script: |
+          echo "Initializing Keychain..."
+          keychain initialize
+          
           echo "Downloading/Creating Provisioning Profiles from Apple Developer Portal..."
           # This Codemagic command will automatically create the App ID and Provisioning Profile if they don't exist!
           app-store-connect fetch-signing-files "$TUIST_BUNDLE_ID" --type IOS_APP_STORE --create
+          
+          echo "Adding Certificates to Keychain..."
+          keychain add-certificates
           
           echo "Applying the profiles to the Xcode project..."
           xcode-project use-profiles
