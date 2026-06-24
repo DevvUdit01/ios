@@ -59,7 +59,7 @@
     <key>NSCalendarsUsageDescription</key>
     <string>${BUILD_SETTINGS_APP_NAME} needs access to your calendar to retrieve and add events.</string>
     <key>NSCameraUsageDescription</key>
-    <string>${BUILD_SETTINGS_APP_NAME} needs access to your camera to upload photos.</string>
+    <string>${BUILD_SETTINGS_APP_NAME} needs access to your camera to capture and upload photos for job postings and profile updates.</string>
     <key>NSFaceIDUsageDescription</key>
     <string>${BUILD_SETTINGS_APP_NAME} needs access to your Face ID to authenticate you. </string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -71,9 +71,11 @@
     <key>NSMicrophoneUsageDescription</key>
     <string>${BUILD_SETTINGS_APP_NAME} needs access to your microphone to capture audio.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>${BUILD_SETTINGS_APP_NAME} needs access to your camera roll to upload photos.</string>
+    <string>${BUILD_SETTINGS_APP_NAME} needs access to your camera roll to save and upload photos for job postings and profile updates.</string>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>${BUILD_SETTINGS_APP_NAME} needs access to your camera roll to upload photos.</string>
+    <string>${BUILD_SETTINGS_APP_NAME} needs access to your camera roll to upload photos for job postings and profile updates.</string>
+    <key>NSUserTrackingUsageDescription</key>
+    <string>This allows us to provide personalized job recommendations and relevant advertisements.</string>
     <key>UIBackgroundModes</key>
     <array>
       <string>remote-notification</string>

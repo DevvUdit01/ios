@@ -350,8 +350,8 @@
     "iosCameraUsageDescription": "",
     "iosPhotoLibraryUsageDescription": "",
     "iosMicrophoneUsageDescription": "",
-    "iOSATTUserTrackingDescription": "",
-    "iOSRequestATTConsentOnLoad": false
+    "iOSATTUserTrackingDescription": "This allows us to provide personalized job recommendations and relevant advertisements.",
+    "iOSRequestATTConsentOnLoad": true
   },
   "developmentTools": {
     "enableWebConsoleLogs": false

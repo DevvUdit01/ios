@@ -10,7 +10,7 @@ let projectName = Environment.projectName.getString(default: "MedianIOS")
 let targetName = Environment.targetName.getString(default: "Median")
 let bundleId = "com.thejobsadvertise.app"
 let marketingVersion = Environment.marketingVersion.getString(default: "1.0")
-let projectVersion = Environment.projectVersion.getString(default: "3")
+let projectVersion = Environment.projectVersion.getString(default: "4")
 let appName = "The Jobs Advertise"
 
 let project = Project(
