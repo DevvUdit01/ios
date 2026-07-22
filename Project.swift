@@ -6,11 +6,11 @@ import ProjectDescription
 //
 // Mapping:  Environment.camelCase  →  TUIST_CAMEL_CASE
 //
-let projectName = Environment.projectName.getString(default: "MedianIOS")
+let projectName = Environment.projectName.getString(default: "MedianIOS") 
 let targetName = Environment.targetName.getString(default: "Median")
 let bundleId = "com.thejobsadvertise.app"
-let marketingVersion = Environment.marketingVersion.getString(default: "1.2")
-let projectVersion = Environment.projectVersion.getString(default: "6")
+let marketingVersion = Environment.marketingVersion.getString(default: "1.3")
+let projectVersion = Environment.projectVersion.getString(default: "7")
 let appName = "The Jobs Advertise"
 
 let project = Project(
